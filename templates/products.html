@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daftar Produk</title>
+</head>
+<body>
+
+<h2>Daftar Produk Bakery</h2>
+
+<a href="/add_product">
+    Tambah Produk
+</a>
+
+<br><br>
+
+<table border="1" cellpadding="10">
+
+    <tr>
+        <th>ID</th>
+        <th>Nama Produk</th>
+        <th>Harga</th>
+        <th>Stok</th>
+        <th>Aksi</th>
+    </tr>
+
+    {% for product in products %}
+
+    <tr>
+
+        <td>{{ product.id }}</td>
+
+        <td>{{ product.nama_produk }}</td>
+
+        <td>Rp {{ product.harga }}</td>
+
+        <td>{{ product.stok }}</td>
+
+        <td>
+
+            <a href="/edit_product/{{ product.id }}">
+                Edit
+            </a>
+
+            |
+
+            <a href="/delete_product/{{ product.id }}">
+                Hapus
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+</body>
+</html>

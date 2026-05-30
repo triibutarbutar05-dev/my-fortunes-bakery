@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tambah Produk</title>
+</head>
+<body>
+
+<h2>Tambah Produk Bakery</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+    <label>Nama Produk</label><br>
+    <input type="text" name="nama_produk" required><br><br>
+
+    <label>Kategori</label><br>
+    <select name="category_id">
+
+        {% for kategori in categories %}
+
+        <option value="{{ kategori[0] }}">
+            {{ kategori[1] }}
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+    <label>Harga</label><br>
+    <input type="number" name="harga" required><br><br>
+
+    <label>Stok</label><br>
+    <input type="number" name="stok" required><br><br>
+
+    <label>Deskripsi</label><br>
+    <textarea name="deskripsi"></textarea><br><br>
+
+    <label>Gambar</label><br>
+    <input type="file" name="gambar"><br><br>
+
+    <button type="submit">
+        Simpan Produk
+    </button>
+
+</form>
+
+</body>
+</html>
