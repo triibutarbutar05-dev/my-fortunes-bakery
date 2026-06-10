@@ -11,10 +11,11 @@ app.secret_key = 'myfortunes_secret_key'
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
 db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="",
-    database="db_myfortunes"
+    host=os.getenv("MYSQLHOST"),
+    user=os.getenv("MYSQLUSER"),
+    password=os.getenv("MYSQLPASSWORD"),
+    database=os.getenv("MYSQLDATABASE"),
+    port=int(os.getenv("MYSQLPORT"))
 )
 
 from functools import wraps
@@ -960,4 +961,4 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
