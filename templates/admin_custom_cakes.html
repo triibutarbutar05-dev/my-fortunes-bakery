@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kelola Custom Cake</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="admin-orders-container">
+
+    <h1>🎂 Daftar Custom Cake</h1>
+
+    <p class="page-subtitle">
+        Kelola seluruh pesanan custom cake pelanggan.
+    </p>
+
+    <table class="orders-table">
+
+        <tr>
+            <th>Pemesan</th>
+            <th>Ukuran</th>
+            <th>Tema</th>
+            <th>Tanggal Ambil</th>
+            <th>Status</th>
+            <th>Aksi</th>
+        </tr>
+
+        {% for cake in cakes %}
+
+        <tr>
+
+            <td>{{ cake.nama }}</td>
+
+            <td>{{ cake.ukuran }}</td>
+
+            <td>{{ cake.tema }}</td>
+
+            <td>{{ cake.tanggal_ambil }}</td>
+
+            <td>
+
+                {% if cake.status == 'pending' %}
+
+                    <span class="status pending">
+                        Pending
+                    </span>
+
+                {% elif cake.status == 'diproses' %}
+
+                    <span class="status process">
+                        Diproses
+                    </span>
+
+                {% elif cake.status == 'selesai' %}
+
+                    <span class="status success">
+                        Selesai
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+            <td class="action-buttons">
+
+                <a href="/admin-custom-cake-detail/{{ cake.id }}"
+                   class="detail-btn">
+                    Detail
+                </a>
+
+                {% if cake.status == 'pending' %}
+
+                <a href="/update-custom-cake/{{ cake.id }}/diproses"
+                   class="process-btn">
+                    Proses
+                </a>
+
+                {% elif cake.status == 'diproses' %}
+
+                <a href="/update-custom-cake/{{ cake.id }}/selesai"
+                   class="success-btn">
+                    Selesai
+                </a>
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

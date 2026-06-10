@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Keranjang Saya</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="cart-container">
+
+    <h1>🛒 Keranjang Saya</h1>
+
+    {% if carts %}
+
+    <table class="cart-table">
+
+        <tr>
+            <th>Produk</th>
+            <th>Harga</th>
+            <th>Qty</th>
+            <th>Subtotal</th>
+        </tr>
+
+        {% for item in carts %}
+
+        <tr>
+            <td>{{ item.nama_produk }}</td>
+
+            <td>
+                Rp {{ "{:,.0f}".format(item.harga).replace(",", ".") }}
+            </td>
+
+            <td>{{ item.qty }}</td>
+
+            <td>
+                Rp {{ "{:,.0f}".format(item.subtotal).replace(",", ".") }}
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <div class="cart-summary">
+
+        <h2>
+            Total:
+            Rp {{ "{:,.0f}".format(total).replace(",", ".") }}
+        </h2>
+
+        <a href="/checkout" class="checkout-btn">
+            Checkout Sekarang
+        </a>
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-cart">
+
+        <h2>Keranjang masih kosong 😢</h2>
+
+        <p>
+            Yuk pilih cake favoritmu terlebih dahulu.
+        </p>
+
+        <a href="/catalog" class="shop-btn">
+            Belanja Sekarang
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

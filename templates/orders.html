@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daftar Pesanan</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="admin-orders-container">
+
+    <h1>📋 Daftar Pesanan</h1>
+
+    <p class="page-subtitle">
+        Kelola seluruh pesanan pelanggan.
+    </p>
+
+    <table class="orders-table">
+
+        <tr>
+            <th>Pemesan</th>
+            <th>Produk</th>
+            <th>Qty</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Aksi</th>
+        </tr>
+
+        {% for order in orders %}
+
+        <tr>
+
+            <td>{{ order.nama }}</td>
+
+            <td>{{ order.nama_produk }}</td>
+
+            <td>{{ order.qty }}</td>
+
+            <td>
+                Rp {{ "{:,.0f}".format(order.total_harga).replace(",", ".") }}
+            </td>
+
+            <td>
+
+                {% if order.status == 'menunggu_verifikasi' %}
+
+                    <span class="status pending">
+                        Menunggu Verifikasi
+                    </span>
+
+                {% elif order.status == 'diproses' %}
+
+                    <span class="status process">
+                        Diproses
+                    </span>
+
+                {% elif order.status == 'selesai' %}
+
+                    <span class="status success">
+                        Selesai
+                    </span>
+
+                {% else %}
+
+                    {{ order.status }}
+
+                {% endif %}
+
+            </td>
+
+            <td class="action-buttons">
+
+                <a href="/admin-order-detail/{{ order.id }}"
+                   class="detail-btn">
+                    Detail
+                </a>
+
+                {% if order.status == 'menunggu_verifikasi' %}
+
+                    <a href="/update_order/{{ order.id }}/diproses"
+                       class="process-btn">
+                        Proses
+                    </a>
+
+                {% elif order.status == 'diproses' %}
+
+                    <a href="/update_order/{{ order.id }}/selesai"
+                       class="success-btn">
+                        Selesai
+                    </a>
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

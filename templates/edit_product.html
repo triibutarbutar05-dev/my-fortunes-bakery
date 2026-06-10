@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Produk</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="add-product-container">
+
+    <div class="form-card">
+
+        <h1>✏️ Edit Produk</h1>
+
+        <p class="page-subtitle">
+            Perbarui informasi produk bakery.
+        </p>
+
+        <form method="POST">
+
+            <div class="form-group">
+                <label>Nama Produk</label>
+
+                <input
+                    type="text"
+                    name="nama_produk"
+                    value="{{ product.nama_produk }}"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Harga</label>
+
+                <input
+                    type="number"
+                    name="harga"
+                    value="{{ "%.0f"|format(product.harga) }}"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Stok</label>
+
+                <input
+                    type="number"
+                    name="stok"
+                    value="{{ product.stok }}"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Deskripsi</label>
+
+                <textarea
+                    name="deskripsi"
+                    rows="5"
+                >{{ product.deskripsi }}</textarea>
+            </div>
+
+            <div class="edit-product-actions">
+                <button type="submit" class="update-product-btn">
+                    💾 Update Produk
+                </button>
+                
+                <a href="/products" class="cancel-product-btn">
+                    Batal
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

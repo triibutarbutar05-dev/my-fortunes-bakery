@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+    <title>Detail Pesanan</title>
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="page-header">
+    <h1>Detail Pesanan</h1>
+    <p>Informasi pesanan dan pembayaran Anda</p>
+</div>
+
+<div class="detail-container">
+
+    <!-- Informasi Penerima -->
+    <div class="detail-card">
+
+        <h2>📦 Informasi Penerima</h2>
+
+        <div class="info-item">
+            <strong>Nama</strong>
+            <span>{{ order.nama_penerima }}</span>
+        </div>
+
+        <div class="info-item">
+            <strong>No HP</strong>
+            <span>{{ order.no_hp }}</span>
+        </div>
+
+        <div class="info-item">
+            <strong>Alamat</strong>
+            <span>{{ order.alamat }}</span>
+        </div>
+
+        <div class="info-item">
+            <strong>Catatan</strong>
+            <span>{{ order.catatan }}</span>
+        </div>
+
+        <div class="info-item">
+            <strong>Status</strong>
+
+            <span class="status-badge">
+                {{ order.status }}
+            </span>
+        </div>
+
+    </div>
+
+    <!-- Bukti Pembayaran -->
+    <div class="detail-card">
+
+        <h2>💳 Bukti Pembayaran</h2>
+
+        <img
+            src="/uploads/{{ order.bukti_pembayaran }}"
+            class="payment-image"
+        >
+
+    </div>
+
+</div>
+
+<div class="table-card">
+
+    <h2>🧁 Produk yang Dipesan</h2>
+
+    <table class="custom-table">
+
+        <tr>
+            <th>Produk</th>
+            <th>Harga</th>
+            <th>Qty</th>
+        </tr>
+
+        {% for item in items %}
+        <tr>
+
+            <td>{{ item.nama_produk }}</td>
+
+            <td>
+                Rp {{ "{:,.0f}".format(item.harga).replace(",", ".") }}
+            </td>
+
+            <td>{{ item.qty }}</td>
+
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

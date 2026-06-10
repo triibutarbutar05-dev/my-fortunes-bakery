@@ -1,25 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+
+    <title>Login - My Fortunes Bakery</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
 </head>
+
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash-message {{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 
-<h2>Login My Fortunes Bakery</h2>
+<div class="auth-container">
 
-<form method="POST">
+    <div class="auth-card">
 
-    <label>Email</label><br>
-    <input type="email" name="email" required><br><br>
+        <h1>🧁 My Fortunes Bakery</h1>
 
-    <label>Password</label><br>
-    <input type="password" name="password" required><br><br>
+        <p class="auth-subtitle">
+            Freshly Baked Happiness Every Day
+        </p>
 
-    <button type="submit">
-        Login
-    </button>
+        <h2>Login</h2>
 
-</form>
+        <form method="POST">
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Masukkan email"
+                required
+            >
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Masukkan password"
+                required
+            >
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+        <p class="auth-link">
+            Belum punya akun?
+            <a href="/register">
+                Daftar sekarang
+            </a>
+        </p>
+
+    </div>
+
+</div>
 
 </body>
 </html>

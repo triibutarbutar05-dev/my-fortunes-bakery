@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pesanan Saya</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="orders-container">
+
+    <h1>📦 Pesanan Saya</h1>
+
+    {% if orders %}
+
+    <table class="orders-table">
+
+        <tr>
+            <th>ID Pesanan</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Detail</th>
+        </tr>
+
+        {% for order in orders %}
+
+        <tr>
+
+            <td>#{{ order.id }}</td>
+
+            <td>
+                Rp {{ "{:,.0f}".format(order.total_harga).replace(",", ".") }}
+            </td>
+
+            <td>
+
+                {% if order.status == 'menunggu_verifikasi' %}
+                    <span class="status pending">
+                        Menunggu Verifikasi
+                    </span>
+
+                {% elif order.status == 'diproses' %}
+                    <span class="status process">
+                        Diproses
+                    </span>
+
+                {% elif order.status == 'selesai' %}
+                    <span class="status success">
+                        Selesai
+                    </span>
+
+                {% else %}
+                    {{ order.status }}
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                <a href="/order-detail/{{ order.id }}"
+                   class="detail-btn">
+                    Lihat Detail
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    {% else %}
+
+    <div class="empty-orders">
+
+        <h2>Belum ada pesanan</h2>
+
+        <p>
+            Yuk pesan cake favoritmu sekarang.
+        </p>
+
+        <a href="/catalog" class="shop-btn">
+            Belanja Sekarang
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

@@ -2,48 +2,93 @@
 <html>
 <head>
     <title>Tambah Produk</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
-<h2>Tambah Produk Bakery</h2>
+{% include 'navbar.html' %}
 
-<form method="POST" enctype="multipart/form-data">
+<div class="add-product-container">
 
-    <label>Nama Produk</label><br>
-    <input type="text" name="nama_produk" required><br><br>
+    <h1>🧁 Tambah Produk Bakery</h1>
 
-    <label>Kategori</label><br>
-    <select name="category_id">
+    <p class="add-product-subtitle">
+        Tambahkan produk baru ke katalog My Fortunes Bakery
+    </p>
 
-        {% for kategori in categories %}
+    <div class="add-product-card">
 
-        <option value="{{ kategori[0] }}">
-            {{ kategori[1] }}
-        </option>
+        <form method="POST" enctype="multipart/form-data">
 
-        {% endfor %}
+            <div class="form-group">
+                <label>Nama Produk</label>
 
-    </select>
+                <input type="text"
+                       name="nama_produk"
+                       placeholder="Masukkan nama produk"
+                       required>
+            </div>
 
-    <br><br>
+            <div class="form-group">
+                <label>Kategori</label>
 
-    <label>Harga</label><br>
-    <input type="number" name="harga" required><br><br>
+                <select name="category_id">
 
-    <label>Stok</label><br>
-    <input type="number" name="stok" required><br><br>
+                    {% for kategori in categories %}
 
-    <label>Deskripsi</label><br>
-    <textarea name="deskripsi"></textarea><br><br>
+                    <option value="{{ kategori[0] }}">
+                        {{ kategori[1] }}
+                    </option>
 
-    <label>Gambar</label><br>
-    <input type="file" name="gambar"><br><br>
+                    {% endfor %}
 
-    <button type="submit">
-        Simpan Produk
-    </button>
+                </select>
+            </div>
 
-</form>
+            <div class="form-group">
+                <label>Harga</label>
+
+                <input type="number"
+                       name="harga"
+                       placeholder="Masukkan harga produk"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Stok</label>
+
+                <input type="number"
+                       name="stok"
+                       placeholder="Masukkan jumlah stok"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Deskripsi</label>
+
+                <textarea name="deskripsi"
+                          rows="5"
+                          placeholder="Tuliskan deskripsi produk"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Upload Gambar Produk</label>
+
+                <input type="file" name="gambar">
+            </div>
+
+            <button type="submit" class="save-product-btn">
+                Simpan Produk
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
 
 </body>
 </html>

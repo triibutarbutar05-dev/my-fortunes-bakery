@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Riwayat Custom Cake</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="custom-history-container">
+
+    <h1>🎂 Riwayat Custom Cake</h1>
+
+    {% if custom_cakes %}
+
+    <table class="custom-history-table">
+
+        <tr>
+            <th>Ukuran</th>
+            <th>Rasa</th>
+            <th>Tema</th>
+            <th>Tanggal Ambil</th>
+            <th>Status</th>
+            <th>Diskusi</th>
+        </tr>
+
+        {% for cake in custom_cakes %}
+
+        <tr>
+
+            <td>{{ cake.ukuran }}</td>
+
+            <td>{{ cake.rasa }}</td>
+
+            <td>{{ cake.tema }}</td>
+
+            <td>{{ cake.tanggal_ambil }}</td>
+
+            <td>
+
+                {% if cake.status == 'menunggu_verifikasi' %}
+
+                    <span class="status pending">
+                        Menunggu Verifikasi
+                    </span>
+
+                {% elif cake.status == 'diproses' %}
+
+                    <span class="status process">
+                        Diproses
+                    </span>
+
+                {% elif cake.status == 'selesai' %}
+
+                    <span class="status success">
+                        Selesai
+                    </span>
+
+                {% else %}
+
+                    {{ cake.status }}
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                <a href="https://wa.me/6282272360689?text=Halo%20Admin%20Fortunes%20Bake,%0A%0ASaya%20ingin%20diskusi%20lebih%20lanjut%20tentang%20pesanan%20custom%20cake.%0A%0ATema:%20{{ cake.tema }}%0ATanggal%20Ambil:%20{{ cake.tanggal_ambil }}"
+                   target="_blank"
+                   class="wa-btn">
+
+                    💬 WhatsApp
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    {% else %}
+
+    <div class="empty-orders">
+
+        <h2>Belum ada pesanan custom cake</h2>
+
+        <p>
+            Yuk buat custom cake impianmu sekarang.
+        </p>
+
+        <a href="/custom-cake" class="shop-btn">
+            Pesan Custom Cake
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

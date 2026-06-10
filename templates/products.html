@@ -1,59 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Daftar Produk</title>
+    <title>Kelola Produk</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
+<script>
+setTimeout(function() {
+
+    let flash = document.getElementById("flash-message");
+
+    if (flash) {
+
+        flash.style.transition = "0.5s";
+        flash.style.opacity = "0";
+
+        setTimeout(function() {
+            flash.remove();
+        }, 500);
+
+    }
+
+}, 2000);
+</script>
 <body>
 
-<h2>Daftar Produk Bakery</h2>
+{% include 'navbar.html' %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="success-alert" id="flash-message">
+            {{ messages[0] }}
+        </div>
+    {% endif %}
+{% endwith %}
 
-<a href="/add_product">
-    Tambah Produk
-</a>
+<div class="products-container">
 
-<br><br>
+    <div class="products-header">
 
-<table border="1" cellpadding="10">
+        <h1>🧁 Kelola Produk Bakery</h1>
 
-    <tr>
-        <th>ID</th>
-        <th>Nama Produk</th>
-        <th>Harga</th>
-        <th>Stok</th>
-        <th>Aksi</th>
-    </tr>
+        <a href="/add_product" class="add-product-btn">
+            + Tambah Produk
+        </a>
 
-    {% for product in products %}
+    </div>
 
-    <tr>
+    <div class="table-card">
 
-        <td>{{ product.id }}</td>
+        <table class="products-table">
 
-        <td>{{ product.nama_produk }}</td>
+            <tr>
+                <th>ID</th>
+                <th>Nama Produk</th>
+                <th>Harga</th>
+                <th>Stok</th>
+                <th>Aksi</th>
+            </tr>
 
-        <td>Rp {{ product.harga }}</td>
+            {% for product in products %}
 
-        <td>{{ product.stok }}</td>
+            <tr>
 
-        <td>
+                <td>#{{ product.id }}</td>
 
-            <a href="/edit_product/{{ product.id }}">
-                Edit
-            </a>
+                <td>{{ product.nama_produk }}</td>
 
-            |
+                <td>
+                    Rp {{ "{:,.0f}".format(product.harga).replace(",", ".") }}
+                </td>
 
-            <a href="/delete_product/{{ product.id }}">
-                Hapus
-            </a>
+                <td>{{ product.stok }}</td>
 
-        </td>
+                <td class="action-buttons">
 
-    </tr>
+                    <a href="/edit_product/{{ product.id }}"
+                       class="edit-btn">
+                        Edit
+                    </a>
 
-    {% endfor %}
+                    <a href="/delete_product/{{ product.id }}"
+                       class="delete-btn"
+                       onclick="return confirm('Yakin ingin menghapus produk ini?')">
+                        Hapus
+                    </a>
 
-</table>
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
 
 </body>
 </html>

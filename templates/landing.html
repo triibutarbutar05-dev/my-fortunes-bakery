@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Fortunes Bakery</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="landing-navbar">
+
+    <div class="logo">
+        🍰 My Fortunes Bakery
+    </div>
+
+    <div class="nav-buttons">
+        <a href="/login" class="nav-login">Login</a>
+        <a href="/register" class="nav-register">Register</a>
+    </div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Cake Premium untuk
+            Momen Spesial Anda
+        </h1>
+
+        <p>
+            Menyediakan berbagai pilihan cake premium,
+            custom cake, dan layanan pemesanan online
+            yang mudah serta praktis.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="/catalog" class="btn-primary">
+                Lihat Katalog
+            </a>
+
+            <a href="/register" class="btn-secondary">
+                Pesan Sekarang
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="hero-image">
+
+        <img src="{{ url_for('static', filename='images/cake-utama.jpeg') }}"
+        alt="Cake">
+
+    </div>
+
+</section>
+
+<!-- KEUNGGULAN -->
+
+<section class="features">
+
+    <h2>Mengapa Memilih Kami?</h2>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            🎂
+            <h3>Cake Premium</h3>
+            <p>Menggunakan bahan berkualitas terbaik.</p>
+        </div>
+
+        <div class="feature-card">
+            ✨
+            <h3>Custom Cake</h3>
+            <p>Desain sesuai keinginan pelanggan.</p>
+        </div>
+
+        <div class="feature-card">
+            🚚
+            <h3>Delivery Mudah</h3>
+            <p>Pemesanan dapat dilakukan secara online.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PRODUK -->
+
+<section class="products-preview">
+
+    <h2>Produk Favorit</h2>
+
+    <div class="product-grid">
+
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=500">
+            <h3>Chocolate Cake</h3>
+        </div>
+
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=500">
+            <h3>Birthday Cake</h3>
+        </div>
+
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=500">
+            <h3>Custom Cake</h3>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- TENTANG -->
+
+<section class="about">
+
+    <h2>Tentang My Fortunes Bakery</h2>
+
+    <p>
+        My Fortunes Bakery merupakan UMKM yang bergerak
+        di bidang penjualan cake premium dan custom cake.
+        Website ini dikembangkan untuk membantu pelanggan
+        melakukan pemesanan secara online dengan lebih mudah,
+        cepat, dan nyaman.
+    </p>
+
+</section>
+
+<!-- CTA -->
+
+<section class="cta">
+
+    <h2>Siap Memesan Cake Favorit Anda?</h2>
+
+    <a href="/register" class="btn-primary">
+        Mulai Sekarang
+    </a>
+
+</section>
+
+<footer>
+
+    © 2026 My Fortunes Bakery | Developed by Lastri Elisabet & Team 
+
+</footer>
+
+</body>
+</html>

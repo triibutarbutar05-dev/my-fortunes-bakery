@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detail Pesanan</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="order-detail-container">
+
+    <h1>📦 Detail Pesanan</h1>
+
+    <div class="detail-grid">
+
+        <!-- INFORMASI PENERIMA -->
+        <div class="detail-card">
+
+            <h2>👤 Informasi Penerima</h2>
+
+            <div class="info-list">
+
+                <p><strong>Nama :</strong> {{ order.nama_penerima }}</p>
+
+                <p><strong>No HP :</strong> {{ order.no_hp }}</p>
+
+                <p><strong>Alamat :</strong> {{ order.alamat }}</p>
+
+                <p><strong>Catatan :</strong> {{ order.catatan }}</p>
+
+                <p>
+                    <strong>Status :</strong>
+
+                    {% if order.status == 'menunggu_verifikasi' %}
+                        <span class="status pending">
+                            Menunggu Verifikasi
+                        </span>
+
+                    {% elif order.status == 'diproses' %}
+                        <span class="status process">
+                            Diproses
+                        </span>
+
+                    {% elif order.status == 'selesai' %}
+                        <span class="status success">
+                            Selesai
+                        </span>
+
+                    {% endif %}
+                </p>
+
+            </div>
+
+            <div class="action-section">
+
+                {% if order.status == 'menunggu_verifikasi' %}
+
+                <a href="/update_order/{{ order.id }}/diproses"
+                   class="process-btn">
+                    ✓ Verifikasi Pembayaran
+                </a>
+
+                {% elif order.status == 'diproses' %}
+
+                <a href="/update_order/{{ order.id }}/selesai"
+                   class="success-btn">
+                    ✓ Tandai Selesai
+                </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <!-- BUKTI PEMBAYARAN -->
+        <div class="detail-card">
+
+            <h2>💳 Bukti Pembayaran</h2>
+
+            <img src="/uploads/{{ order.bukti_pembayaran }}"
+                 class="payment-proof">
+
+        </div>
+
+    </div>
+
+    <!-- DAFTAR PRODUK -->
+    <div class="detail-card.full-width">
+
+        <h2>🧁 Daftar Produk</h2>
+
+        <table class="orders-table">
+
+            <tr>
+                <th>Produk</th>
+                <th>Harga</th>
+                <th>Qty</th>
+            </tr>
+
+            {% for item in items %}
+
+            <tr>
+
+                <td>{{ item.nama_produk }}</td>
+
+                <td>
+                    Rp {{ "{:,.0f}".format(item.harga).replace(",", ".") }}
+                </td>
+
+                <td>{{ item.qty }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="checkout-container">
+
+    <div class="checkout-card">
+
+        <div class="checkout-header">
+            <h1>🛒 Checkout Pesanan</h1>
+            <p>Lengkapi data pengiriman dan unggah bukti pembayaran.</p>
+        </div>
+
+        <form method="POST"
+              enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label>Nama Penerima</label>
+                <input
+                    type="text"
+                    name="nama_penerima"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>No HP</label>
+                <input
+                    type="text"
+                    name="no_hp"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Alamat Pengiriman</label>
+                <textarea
+                    name="alamat"
+                    rows="4"
+                    required
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Catatan Tambahan</label>
+                <textarea
+                    name="catatan"
+                    rows="3"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Bukti Pembayaran</label>
+
+                <input
+                    type="file"
+                    name="bukti_pembayaran"
+                    class="file-input"
+                >
+            </div>
+
+            <div class="form-actions">
+
+                <button
+                    type="submit"
+                    class="save-btn">
+                    ✅ Konfirmasi Pesanan
+                </button>
+
+                <a href="/cart"
+                   class="cancel-btn">
+                    Batal
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

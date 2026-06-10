@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+    <title>Custom Cake Order</title>
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="custom-container">
+
+    <div class="custom-header">
+        <h1>🎂 Pesan Custom Cake</h1>
+        <p>
+            Buat kue impianmu sesuai ukuran, rasa, dan tema yang kamu inginkan.
+        </p>
+    </div>
+
+    <div class="custom-card">
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <label>Ukuran Kue</label>
+            <select name="ukuran">
+
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
+
+            </select>
+
+            <label>Rasa</label>
+            <input
+                type="text"
+                name="rasa"
+                placeholder="Contoh: Chocolate, Vanilla"
+                required
+            >
+
+            <label>Tema Kue</label>
+            <input
+                type="text"
+                name="tema"
+                placeholder="Contoh: Birthday, Wedding"
+                required
+            >
+
+            <label>Tanggal Ambil</label>
+            <input
+                type="date"
+                name="tanggal_ambil"
+                required
+            >
+
+            <label>Catatan Tambahan</label>
+            <textarea
+                name="catatan"
+                rows="4"
+                placeholder="Tuliskan detail tambahan jika ada"
+            ></textarea>
+
+            <label>Upload Gambar Referensi</label>
+            <input
+                type="file"
+                name="gambar_referensi"
+            >
+
+            <button type="submit" class="btn-submit">
+                Kirim Pesanan
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

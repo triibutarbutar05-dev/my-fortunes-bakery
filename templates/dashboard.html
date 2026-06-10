@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="dashboard-hero">
+
+    <h1>
+        Selamat Datang, {{ session['nama'] }} 👋
+    </h1>
+
+    <p>
+        Freshly Baked Happiness Every Day 🍰
+    </p>
+
+</div>
+
+{% if session['role'] == 'admin' %}
+
+<div class="dashboard-cards">
+
+    <a href="/products" class="dashboard-card">
+        <h3>📦 Kelola Produk</h3>
+        <p>Lihat dan edit semua produk bakery.</p>
+    </a>
+
+    <a href="/add_product" class="dashboard-card">
+        <h3>➕ Tambah Produk</h3>
+        <p>Tambahkan produk baru ke katalog.</p>
+    </a>
+
+    <a href="/orders" class="dashboard-card">
+        <h3>🧾 Kelola Pesanan</h3>
+        <p>Periksa dan proses pesanan pelanggan.</p>
+    </a>
+
+    <a href="/admin-custom-cakes" class="dashboard-card">
+        <h3>🎂 Custom Cake</h3>
+        <p>Lihat pesanan custom cake pelanggan.</p>
+    </a>
+
+</div>
+
+{% else %}
+
+<div class="dashboard-cards">
+
+    <a href="/catalog" class="dashboard-card">
+        <h3>🍰 Katalog Produk</h3>
+        <p>Lihat semua cake dan bakery favoritmu.</p>
+    </a>
+
+    <a href="/custom-cake" class="dashboard-card">
+        <h3>🎂 Custom Cake</h3>
+        <p>Buat desain cake sesuai keinginanmu.</p>
+    </a>
+
+    <a href="/cart" class="dashboard-card">
+        <h3>🛒 Keranjang</h3>
+        <p>Cek produk yang sudah dipilih.</p>
+    </a>
+
+    <a href="/my-orders" class="dashboard-card">
+        <h3>📦 Pesanan Saya</h3>
+        <p>Pantau status pesanan secara real-time.</p>
+    </a>
+
+</div>
+
+{% endif %}
+
+</body>
+</html>

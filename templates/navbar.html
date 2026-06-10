@@ -1,0 +1,38 @@
+<nav class="navbar">
+
+    <div class="nav-left">
+
+        <a href="/dashboard">Dashboard</a>
+
+        {% if session['role'] == 'admin' %}
+
+            <a href="/products">Kelola Produk</a>
+            <a href="/add_product">Tambah Produk</a>
+            <a href="/orders">Kelola Pesanan</a>
+            <a href="/catalog">Lihat Katalog</a>
+            <a href="/admin-custom-cakes">Kelola Custom Cake</a>
+
+        {% else %}
+
+            <a href="/catalog">Katalog</a>
+            <a href="/custom-cake">Custom Cake</a>
+            <a href="/my-orders">Pesanan Saya</a>
+            <a href="/my-custom-cakes">Riwayat Custom Cake</a>
+
+        {% endif %}
+
+    </div>
+
+    <div class="nav-right">
+
+        {% if session['role'] != 'admin' %}
+        <a href="/cart" class="cart-icon">
+            🛒
+        </a>
+        {% endif %}
+
+        <a href="/logout">Logout</a>
+
+    </div>
+
+</nav>

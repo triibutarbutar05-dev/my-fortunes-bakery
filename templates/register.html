@@ -1,28 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register - My Fortunes</title>
+
+    <title>Register - My Fortunes Bakery</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
 </head>
+
 <body>
 
-    <h2>Register My Fortunes Bakery</h2>
+<div class="auth-container">
 
-    <form method="POST">
+    <div class="auth-card">
 
-        <label>Nama</label><br>
-        <input type="text" name="nama" required><br><br>
+        <h1>🧁 My Fortunes Bakery</h1>
 
-        <label>Email</label><br>
-        <input type="email" name="email" required><br><br>
+        <p class="auth-subtitle">
+            Freshly Baked Happiness Every Day
+        </p>
 
-        <label>Password</label><br>
-        <input type="password" name="password" required><br><br>
+        <h2>Register</h2>
 
-        <button type="submit">
-            Register
-        </button>
+        <form method="POST">
 
-    </form>
+            <label>Nama Lengkap</label>
+
+            <input
+                type="text"
+                name="nama"
+                placeholder="Masukkan nama lengkap"
+                required
+            >
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Masukkan email"
+                required
+            >
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Masukkan password"
+                required
+            >
+
+            <button type="submit">
+                Register
+            </button>
+
+        </form>
+
+        <p class="auth-link">
+            Sudah punya akun?
+            <a href="/login">
+                Login di sini
+            </a>
+        </p>
+
+    </div>
+
+</div>
 
 </body>
 </html>

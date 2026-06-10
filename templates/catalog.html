@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Fortunes Bakery</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .catalog-header{
+            text-align:center;
+            margin:50px 0 30px;
+        }
+
+        .catalog-header h1{
+            font-size:60px;
+            color:#9b673d;
+            margin-bottom:10px;
+        }
+
+        .catalog-header p{
+            color:#666;
+            font-size:18px;
+        }
+
+        .filter-section{
+            display:flex;
+            justify-content:center;
+            margin-bottom:40px;
+        }
+
+        .filter-form{
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
+
+        .filter-form select{
+            width:220px;
+            padding:12px 15px;
+            border:1px solid #ddd;
+            border-radius:12px;
+            font-size:15px;
+            background:white;
+            cursor:pointer;
+        }
+
+        .filter-form button{
+            background:#a06d42;
+            color:white;
+            border:none;
+            padding:12px 24px;
+            border-radius:12px;
+            font-weight:600;
+            cursor:pointer;
+        }
+
+        .filter-form button:hover{
+            background:#8a5d35;
+        }
+
+        .container{
+            display:flex;
+            flex-wrap:wrap;
+            gap:25px;
+            justify-content:center;
+            padding-bottom:50px;
+        }
+
+        .card{
+            width:260px;
+            background:white;
+            border-radius:20px;
+            overflow:hidden;
+            box-shadow:0 4px 15px rgba(0,0,0,0.08);
+            transition:0.3s;
+        }
+
+        .card:hover{
+            transform:translateY(-5px);
+        }
+
+        .card img{
+            width:100%;
+            height:220px;
+            object-fit:cover;
+        }
+
+        .card-body{
+            padding:18px;
+        }
+
+        .kategori-badge{
+            display:inline-block;
+            background:#f5e6d7;
+            color:#9b673d;
+            padding:6px 12px;
+            border-radius:20px;
+            font-size:13px;
+            font-weight:600;
+            margin-bottom:12px;
+        }
+
+        .card h3{
+            margin:10px 0;
+            color:#333;
+        }
+
+        .price{
+            color:#9b673d;
+            font-size:22px;
+            font-weight:bold;
+            margin-bottom:15px;
+        }
+
+        .button-group{
+            display:flex;
+            flex-direction:column;
+            gap:10px;
+        }
+
+        .btn-detail{
+            text-align:center;
+            text-decoration:none;
+            background:#a06d42;
+            color:white;
+            padding:10px;
+            border-radius:10px;
+            font-weight:600;
+        }
+
+        .btn-detail:hover{
+            background:#8a5d35;
+        }
+
+        .btn-review{
+            text-align:center;
+            text-decoration:none;
+            border:2px solid #a06d42;
+            color:#a06d42;
+            padding:10px;
+            border-radius:10px;
+            font-weight:600;
+        }
+
+        .btn-review:hover{
+            background:#a06d42;
+            color:white;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="catalog-header">
+    <h1>My Fortunes Bakery</h1>
+    <p>Freshly Baked Happiness Every Day 🍰</p>
+</div>
+
+<div class="filter-section">
+
+    <form method="GET"
+          action="/catalog"
+          class="filter-form">
+
+        <select name="category">
+
+            <option value="">
+                Semua Kategori
+            </option>
+
+            {% for category in categories %}
+
+            <option value="{{ category.id }}"
+                {% if selected_category == category.id|string %}
+                    selected
+                {% endif %}
+            >
+                {{ category.nama_kategori }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+        <button type="submit">
+            Filter
+        </button>
+
+    </form>
+
+</div>
+
+<div class="container">
+
+{% for product in products %}
+
+<div class="card">
+
+    <img src="/uploads/{{ product.gambar }}"
+         alt="{{ product.nama_produk }}">
+
+    <div class="card-body">
+
+        {% for category in categories %}
+            {% if category.id == product.category_id %}
+                <div class="kategori-badge">
+                    {{ category.nama_kategori }}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <h3>
+            {{ product.nama_produk }}
+        </h3>
+
+        <div class="price">
+            Rp {{ "{:,.0f}".format(product.harga).replace(",", ".") }}
+        </div>
+
+        <div class="button-group">
+
+            <a href="/product/{{ product.id }}"
+               class="btn-detail">
+                Lihat Detail
+            </a>
+
+            <a href="/review/{{ product.id }}"
+               class="btn-review">
+                ⭐ Beri Review
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>

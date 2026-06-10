@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detail Custom Cake</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="order-detail-container">
+
+    <h1>🎂 Detail Custom Cake</h1>
+
+    <div class="detail-grid">
+
+        <div class="detail-card">
+
+            <h2>👤 Informasi Pemesan</h2>
+
+            <p><strong>Nama :</strong> {{ cake.nama }}</p>
+            <p><strong>Ukuran :</strong> {{ cake.ukuran }}</p>
+            <p><strong>Rasa :</strong> {{ cake.rasa }}</p>
+            <p><strong>Tema :</strong> {{ cake.tema }}</p>
+            <p><strong>Tanggal Ambil :</strong> {{ cake.tanggal_ambil }}</p>
+
+            <p>
+                <strong>Status :</strong>
+
+                {% if cake.status == 'pending' %}
+                    <span class="status pending">
+                        Pending
+                    </span>
+
+                {% elif cake.status == 'diproses' %}
+                    <span class="status process">
+                        Diproses
+                    </span>
+
+                {% elif cake.status == 'selesai' %}
+                    <span class="status success">
+                        Selesai
+                    </span>
+
+                {% endif %}
+            </p>
+
+            <div style="margin-top:20px;">
+
+                {% if cake.status == 'pending' %}
+
+                <a href="/update-custom-cake/{{ cake.id }}/diproses"
+                   class="process-btn">
+                    Proses Pesanan
+                </a>
+
+                {% elif cake.status == 'diproses' %}
+
+                <a href="/update-custom-cake/{{ cake.id }}/selesai"
+                   class="success-btn">
+                    Tandai Selesai
+                </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <div class="detail-card">
+
+            <h2>🖼️ Gambar Referensi</h2>
+
+            {% if cake.gambar_referensi %}
+
+            <img src="/uploads/{{ cake.gambar_referensi }}"
+                 class="payment-proof">
+
+            {% else %}
+
+            <p>Tidak ada gambar referensi.</p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="detail-card">
+
+        <h2>📝 Catatan Pelanggan</h2>
+
+        <p>
+            {{ cake.catatan if cake.catatan else 'Tidak ada catatan.' }}
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>
